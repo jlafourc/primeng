@@ -25,8 +25,11 @@ export class UseStyle {
                 media,
                 nonce
             });
-
-            const HEAD = this.document.head;
+            var HEAD = this.document.getElementById('style-container');
+            console.log(options);
+            if (options.styleParentElementId) {
+                HEAD = this.document.getElementById(options.styleParentElementId);
+            }
 
             first && HEAD.firstChild ? HEAD.insertBefore(styleRef, HEAD.firstChild) : HEAD.appendChild(styleRef);
             setAttribute(styleRef, 'data-primeng-style-id', name);
