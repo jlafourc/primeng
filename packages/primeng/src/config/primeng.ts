@@ -22,6 +22,7 @@ export type PrimeNGConfigType = {
     translation?: Translation;
     zIndex?: ZIndex;
     filterMatchModeOptions?: any;
+    stylesContainerId?: string | undefined;
 } & ThemeConfigType;
 
 @Injectable({ providedIn: 'root' })
@@ -43,6 +44,8 @@ export class PrimeNG extends ThemeProvider {
         numeric: [FilterMatchMode.EQUALS, FilterMatchMode.NOT_EQUALS, FilterMatchMode.LESS_THAN, FilterMatchMode.LESS_THAN_OR_EQUAL_TO, FilterMatchMode.GREATER_THAN, FilterMatchMode.GREATER_THAN_OR_EQUAL_TO],
         date: [FilterMatchMode.DATE_IS, FilterMatchMode.DATE_IS_NOT, FilterMatchMode.DATE_BEFORE, FilterMatchMode.DATE_AFTER]
     };
+
+    stylesContainerId?: string | undefined;
 
     public translation: Translation = {
         startsWith: 'Starts with',
@@ -194,7 +197,7 @@ export class PrimeNG extends ThemeProvider {
     }
 
     setConfig(config: PrimeNGConfigType): void {
-        const { csp, ripple, inputStyle, inputVariant, theme, overlayOptions, translation } = config || {};
+        const { csp, ripple, inputStyle, inputVariant, theme, overlayOptions, translation, stylesContainerId } = config || {};
 
         if (csp) this.csp.set(csp);
         if (ripple) this.ripple.set(ripple);
@@ -202,6 +205,7 @@ export class PrimeNG extends ThemeProvider {
         if (inputVariant) this.inputVariant.set(inputVariant);
         if (overlayOptions) this.overlayOptions = overlayOptions;
         if (translation) this.setTranslation(translation);
+        if (stylesContainerId) this.stylesContainerId = stylesContainerId;
 
         if (theme)
             this.setThemeConfig({

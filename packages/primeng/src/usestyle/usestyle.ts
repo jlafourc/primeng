@@ -25,10 +25,10 @@ export class UseStyle {
                 media,
                 nonce
             });
-            var HEAD = this.document.getElementById('style-container');
+            var HEAD = this.document.head;
             console.log(options);
-            if (options.styleParentElementId) {
-                HEAD = this.document.getElementById(options.styleParentElementId);
+            if (options.stylesContainerId) {
+                HEAD = this.document.getElementById(options.stylesContainerId);
             }
 
             first && HEAD.firstChild ? HEAD.insertBefore(styleRef, HEAD.firstChild) : HEAD.appendChild(styleRef);

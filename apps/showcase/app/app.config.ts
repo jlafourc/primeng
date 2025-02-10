@@ -11,6 +11,6 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })), // withEnabledBlockingInitialNavigation()
         provideHttpClient(withFetch()),
         provideAnimationsAsync(),
-        providePrimeNG({ theme: Noir, ripple: false, styleParentElementSelector: 'style-container' })
+        providePrimeNG({ theme: Noir, ripple: false, stylesContainerId: 'style-container' })
     ]
 };

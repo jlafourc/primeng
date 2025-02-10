@@ -7,7 +7,6 @@ export type ThemeType = { preset?: any; options?: any } | 'none' | boolean | und
 
 export type ThemeConfigType = {
     theme?: ThemeType;
-    styleParentElementSelector?: string | undefined;
     csp?: {
         nonce: string | undefined;
     };
@@ -17,8 +16,6 @@ export type ThemeConfigType = {
 export class ThemeProvider {
     // @todo define type for theme
     theme = signal<any>(undefined);
-
-    public styleParentElementSelector?: string | undefined;
 
     csp = signal<{ nonce: string | undefined }>({ nonce: undefined });
 
@@ -67,7 +64,7 @@ export class ThemeProvider {
         // common
         if (!Theme.isStyleNameLoaded('common')) {
             const { primitive, semantic, global, style } = this.baseStyle.getCommonTheme?.() || {};
-            const styleOptions = { nonce: this.csp?.()?.nonce, styleParentElementId: this.styleParentElementSelector };
+            const styleOptions = { nonce: this.csp?.()?.nonce };
 
             this.baseStyle.load(primitive?.css, { name: 'primitive-variables', ...styleOptions });
             this.baseStyle.load(semantic?.css, { name: 'semantic-variables', ...styleOptions });
@@ -79,9 +76,8 @@ export class ThemeProvider {
     }
 
     setThemeConfig(config: ThemeConfigType): void {
-        const { theme, csp, styleParentElementSelector } = config || {};
+        const { theme, csp } = config || {};
         if (theme) this.theme.set(theme);
-        if (styleParentElementSelector) this.styleParentElementSelector = styleParentElementSelector;
         if (csp) this.csp.set(csp);
     }
 }
